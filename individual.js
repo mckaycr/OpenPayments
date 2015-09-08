@@ -8,10 +8,9 @@ module.exports = {
 		return Covered_Recipient
 	}	 	
 };
-
 // This object will be returned with all the results from the six queries
 var Covered_Recipient = {}
-
+// This is the main function
 function main(options){
 	var datasets = buildArr();
 	var Entity_type = options.type + '_id'
@@ -20,7 +19,6 @@ function main(options){
 		getResults(e[0],e[1],options.id);
 	})
 }
-
 // This function reads the config file and stores all the url information for the datasets you want to query.
 // It will return an array of where each element contians program year, payment type, and the dataset URL with no paramerters
 function buildArr(){
@@ -38,15 +36,19 @@ function buildArr(){
 	}
 	return temp
 }
-
 // This function will return a URL in the form of a string
 function buildURI(program_year,payment_type,entity_id){
-	return config.get("datasets." + program_year + "." + payment_type) + "?$$app_token="+config.get('auth.app_token')+config.get('params.physician.'+payment_type) + entity_id +"'"
+	switch(payment_type){
+		case 'pi':
+			return config.get("datasets." + program_year + "." + payment_type) + "?$$app_token="+config.get('auth.app_token')+"&$select=sum(total_amount_of_payment_usdollars),%20count(record_id)&$where=(physician_profile_id IS NULL OR physician_profile_id!=%27"+entity_id+"%27)%20AND%20(principal_investigator_1_profile_id=%27"+entity_id+"%27%20OR%20principal_investigator_2_profile_id=%27"+entity_id+"%27%20OR%20principal_investigator_3_profile_id=%27"+entity_id+"%27%20OR%20principal_investigator_4_profile_id=%27"+entity_id+"%27%20OR%20principal_investigator_5_profile_id=%27"+entity_id+"%27)"
+			break;
+		default:
+			return config.get("datasets." + program_year + "." + payment_type) + "?$$app_token="+config.get('auth.app_token')+config.get('params.physician.'+payment_type) + entity_id +"'"
+	}
 }
-
 // This function will update the global variable Covered_recipient with all the information from each query
 function getResults(program_year,payment_type,entity_id){
-	var opayment_typeions = {
+	var options = {
 		    method: 'GET'
 		    ,uri: buildURI(program_year,payment_type,entity_id)
 		    ,gzip: true
@@ -57,12 +59,11 @@ function getResults(program_year,payment_type,entity_id){
 		       	,sendImmediately: true
 			}
 		};
-	var temp = request(opayment_typeions.method,opayment_typeions.uri,opayment_typeions).getBody('utf8')
+	var temp = request(options.method,options.uri,options).getBody('utf8')
 	var arrResults = JSON.parse(temp)
 	if(arrResults.length>0){
 		if(!(Covered_Recipient.hasOwnProperty(program_year))){Covered_Recipient[program_year]= {}}
 		if(!(Covered_Recipient[program_year].hasOwnProperty(payment_type))){Covered_Recipient[program_year][payment_type]= {}}
-
 		arrResults.forEach(function(element){
 			if(!(Covered_Recipient[program_year][payment_type].hasOwnProperty('value'))){
 				Covered_Recipient[program_year][payment_type].value = 0
@@ -71,7 +72,7 @@ function getResults(program_year,payment_type,entity_id){
 			switch(payment_type){
 				case 'ownership':
 					if(!(Covered_Recipient[program_year][payment_type].hasOwnProperty('interest'))){Covered_Recipient[program_year][payment_type].interest = 0}
-					Covered_Recipient[program_year][payment_type].value = Covered_Recipient[program_year][payment_type].value + Number(element.sum_total_amount_invested_usdollars)
+					Covered_Recipient[program_year][payment_type].value = Covered_Recipient[program_year][payment_type].value + Number(element.sum_total_amount_invested_usdollars);
 					Covered_Recipient[program_year][payment_type].interest = Covered_Recipient[program_year][payment_type].interest + Number(element.sum_value_of_interest)
 					Covered_Recipient[program_year][payment_type].count = Covered_Recipient[program_year][payment_type].count + Number(element.count_record_id)
 					break;
@@ -92,4 +93,3 @@ function getResults(program_year,payment_type,entity_id){
 		})
 	}
 }
-
