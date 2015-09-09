@@ -16,6 +16,7 @@ var physician = demo.query(options);  // This initiates the query
 console.log('Results: ");
 console.log(physician);
 // or
+console.log('Results: ");
 console.log(physician[2014].general.value)
 ```
 ## Results
