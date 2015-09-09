@@ -46,6 +46,37 @@ Results:
 ## Prerequisites
 - Node is required
 - At the moment, and Socrata login, and app token.  This won't be required later
+- A config.json file after installation that looks like this
+```
+{
+	"auth":{
+		"user":"YOUR-SOCRATA-USERNAME",
+		"key":"YOUR-PASSWORD",
+		"app_token":"YOUR-APP-TOKEN"
+	},
+	"datasets":{
+		"2013":{
+			"general":"https://openpaymentsdata.cms.gov/resource/7jmr-y7em.json",
+			"research":"https://openpaymentsdata.cms.gov/resource/347h-8q4c.json",
+			"ownership":"https://openpaymentsdata.cms.gov/resource/9dan-a5me.json",
+			"pi":"https://openpaymentsdata.cms.gov/resource/347h-8q4c.json"
+		},
+		"2014":{
+			"general":"https://openpaymentsdata.cms.gov/resource/y4mv-5s9j.json",
+			"research":"https://openpaymentsdata.cms.gov/resource/qsvx-wh3i.json",
+			"ownership":"https://openpaymentsdata.cms.gov/resource/rrmg-ctbf.json",
+			"pi":"https://openpaymentsdata.cms.gov/resource/qsvx-wh3i.json"	
+		}
+	},
+	"params":{
+		"physician":{
+			"general":"&$select=dispute_status_for_publication,sum(total_amount_of_payment_usdollars), count(record_id)&$group=dispute_status_for_publication&$where=physician_profile_id='",
+			"research":"&$select=dispute_status_for_publication,sum(total_amount_of_payment_usdollars), count(record_id)&$group=dispute_status_for_publication&$where=physician_profile_id='",
+			"ownership":"&$select=dispute_status_for_publication,sum(total_amount_invested_usdollars),sum(value_of_interest), count(record_id)&$group=dispute_status_for_publication&$where=physician_profile_id='"
+		}
+	}
+}
+'''
  
 ## Setup
 ```
