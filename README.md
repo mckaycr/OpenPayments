@@ -6,13 +6,13 @@ This is meant to be a module that other developers can use to build search tools
 
 ## Example
 ```
-var demo = require('individual');
+var data = require('individual');
 options = {
  'id':268527  // This is a physician_profile_id in open payments
  ,'type': 'physician'  //  This is an entity type, later I will allow for more
 }
 
-var physician = demo.query(options);  // This initiates the query
+var physician = data.query(options);  // This initiates the query
 console.log('Results: ");
 console.log(physician);
 // or
