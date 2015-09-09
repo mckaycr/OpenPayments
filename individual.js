@@ -1,5 +1,4 @@
 var request = require('sync-request')
-	,fs = require('fs')
 	,config = require('config');
 
 module.exports = {
