@@ -1,15 +1,15 @@
 {
   "name": "summary_qa",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "This project is for creating re-usable node modules for querying Open Payments data via the Socrata API.",
+  "main": "individual.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node app"
   },
-  "author": "",
+  "author": "Christopher McKay",
   "license": "ISC",
   "dependencies": {
     "config": "^1.15.0",
-    "request": "^2.60.0"
+    "sync-request": "^2.0.1"
   }
 }
