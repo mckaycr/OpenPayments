@@ -79,11 +79,8 @@ Results:
 ```
  
 ## Setup
+This package is published in NPM so to install you just need to do the following:
 ```
-npm install
-```
-## Demo App
-```
-node app
+npm install open-payments
 ```
 When I get my act together, it will accept a profile id as a arguement but for now just edit the app.js
