@@ -4,6 +4,11 @@ This project is for creating re-usable node modules for querying Open Payments d
 
 This is meant to be a module that other developers can use to build search tools for Open Payments data.
 
+## Setup
+This package is published in NPM so to install you just need to do the following:
+```
+npm install open-payments
+```
 ## Example
 ```
 var data = require('individual');
@@ -77,10 +82,3 @@ Results:
 	}
 }
 ```
- 
-## Setup
-This package is published in NPM so to install you just need to do the following:
-```
-npm install open-payments
-```
-When I get my act together, it will accept a profile id as a arguement but for now just edit the app.js
