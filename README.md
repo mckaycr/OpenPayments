@@ -82,3 +82,14 @@ Results:
 	}
 }
 ```
+##Methods
+---
+##summary(options);
+
+This method provides a summed total of all stats for a particular entity which should match what the curent search tool displays in the summary details for a particular entity.  This is with the exception of teaching hospitals which may have a separate ID per program year.  This module doesn't yet find all associated ID's.  Maybe in the furture
+
+- `id` - This is the open payments id for the entity you want a summary for
+- `type` - This is the entity type you want a summary for.  Available options for this is:
+	- `physician`
+	- `hospital`
+	- `company`
