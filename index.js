@@ -2,7 +2,7 @@ var request = require('sync-request')
 	,config = require('config');
 
 module.exports = {
-	query : function(options){
+	summary : function(options){
 		main(options);
 		return Covered_Recipient
 	}	 	
@@ -11,45 +11,47 @@ module.exports = {
 var Covered_Recipient = {}
 // This is the main function
 function main(options){
-	var datasets = buildArr();
+	var datasets = buildArr(options.type);
 	var Entity_type = options.type + '_id'
 	Covered_Recipient[Entity_type] = options.id
 	datasets.forEach(function(e){
-		getResults(e[0],e[1],options.id);
+		getResults(e[0],e[1],options.id,options.type);
 	})
 }
 // This function reads the config file and stores all the url information for the datasets you want to query.
 // It will return an array of where each element contians program year, payment type, and the dataset URL with no paramerters
-function buildArr(){
-	var validation_messages = config.get('datasets')
+function buildArr(entity_type){
+	var datasets = config.get('datasets')
 	var temp = [];
-	for (var key in validation_messages) {
-	   if (validation_messages.hasOwnProperty(key)) {
-	       var obj = validation_messages[key];
+	for (var key in datasets) {
+	   if (datasets.hasOwnProperty(key)) {
+	       var obj = datasets[key];
 	        for (var prop in obj) {
-	          if(obj.hasOwnProperty(prop)){
-	            temp.push([key,prop,obj[prop]]);
-	          }
+	       		if(entity_type!='hospital'||prop!='ownership'){
+		          if(obj.hasOwnProperty(prop)){
+		            temp.push([key,prop,obj[prop]]);
+		          }
+	     	 }
 	       }
 	    }
 	}
 	return temp
 }
 // This function will return a URL in the form of a string
-function buildURI(program_year,payment_type,entity_id){
+function buildURI(program_year,payment_type,entity_id,entity_type){
 	switch(payment_type){
 		case 'pi':
 			return config.get("datasets." + program_year + "." + payment_type) + "?$$app_token="+config.get('auth.app_token')+"&$group=dispute_status_for_publication&$select=dispute_status_for_publication,sum(total_amount_of_payment_usdollars),%20count(record_id)&$where=(physician_profile_id IS NULL OR physician_profile_id!=%27"+entity_id+"%27)%20AND%20(principal_investigator_1_profile_id=%27"+entity_id+"%27%20OR%20principal_investigator_2_profile_id=%27"+entity_id+"%27%20OR%20principal_investigator_3_profile_id=%27"+entity_id+"%27%20OR%20principal_investigator_4_profile_id=%27"+entity_id+"%27%20OR%20principal_investigator_5_profile_id=%27"+entity_id+"%27)"
 			break;
 		default:
-			return config.get("datasets." + program_year + "." + payment_type) + "?$$app_token="+config.get('auth.app_token')+config.get('params.physician.'+payment_type) + entity_id +"'"
+			return config.get("datasets." + program_year + "." + payment_type) + "?$$app_token="+config.get('auth.app_token')+config.get('params.'+entity_type+'.'+payment_type) + entity_id +"'"
 	}
 }
 // This function will update the global variable Covered_recipient with all the information from each query
-function getResults(program_year,payment_type,entity_id){
+function getResults(program_year,payment_type,entity_id,entity_type){
 	var options = {
 		    method: 'GET'
-		    ,uri: buildURI(program_year,payment_type,entity_id)
+		    ,uri: buildURI(program_year,payment_type,entity_id,entity_type)
 		    ,gzip: true
 		    ,json: true
 		    ,auth: {
