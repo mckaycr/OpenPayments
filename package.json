@@ -1,7 +1,7 @@
 {
   "name": "open-payments",
-  "version": "0.1.4",
-  "description": "This project is for creating re-usable node modules for querying Open Payments data via the Socrata API.This is meant to be a module that other developers can use to build search tools for Open Payments data.",
+  "version": "0.1.5",
+  "description": "This project is for creating re-usable node modules for querying Open Payments data via the Socrata API.\n\nThis is meant to be a module that other developers can use to build search tools for Open Payments data.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
