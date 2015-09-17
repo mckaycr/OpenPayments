@@ -1,6 +1,6 @@
 {
   "name": "open-payments",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "This project is for creating re-usable node modules for querying Open Payments data via the Socrata API.This is meant to be a module that other developers can use to build search tools for Open Payments data.",
   "main": "index.js",
   "scripts": {
@@ -22,17 +22,12 @@
     "socrata",
     "soda"
   ],
-  "author": {
-    "name": "christopher mckay"
-  },
+  "author": "christopher mckay",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mckaycr/OpenPayments/issues"
   },
   "homepage": "https://github.com/mckaycr/OpenPayments#readme",
-  "readme": "# OpenPayments\r\n\r\nThis project is for creating re-usable node modules for querying Open Payments data via the Socrata API.\r\n\r\nThis is meant to be a module that other developers can use to build search tools for Open Payments data.\r\n\r\n## Setup\r\n```\r\nnpm install open-payments\r\n```\r\n\r\n## Example\r\n```\r\nvar data = require('individual');\r\noptions = {\r\n 'id':268527  // This is a physician_profile_id in open payments\r\n ,'type': 'physician'  //  This is an entity type, later I will allow for more\r\n}\r\n\r\nvar physician = data.query(options);  // This initiates the query\r\nconsole.log('Results: \");\r\nconsole.log(physician);\r\n// or\r\nconsole.log('Results: \");\r\nconsole.log(physician[2014].general.value)\r\n```\r\n## Results\r\n```\r\nResults:\r\n{ '2013':\r\n   { general: { value: 31931.57, count: 81 },\r\n     undisputes: 86,\r\n     research: { value: 1525, count: 2 },\r\n     ownership: { value: 127999.05, count: 3, interest: 67452.24 },\r\n     pi: { value: 33510, count: 10 } },\r\n  '2014':\r\n   { general: { value: 1172184.0999999999, count: 203 },\r\n     undisputes: 202,\r\n     disputes: 6,\r\n     research: { value: 5000, count: 1 },\r\n     ownership: { value: 260228.14, count: 4, interest: 262942.14 },\r\n     pi: { value: 67492.76, count: 31 } },\r\n  physician_id: 268527 }\r\n```\r\nor\r\n```\r\nResults:\r\n1172184.0999999999\r\n```\r\n\r\n## Prerequisites\r\n- Node is required\r\n- A config.json file after installation that looks like this\r\n```\r\n{\r\n\t\"auth\":{\r\n\t\t\"user\":\"\",\r\n\t\t\"key\":\"\",\r\n\t\t\"app_token\":\"\"\r\n\t},\r\n\t\"datasets\":{\r\n\t\t\"2013\":{\r\n\t\t\t\"general\":\"https://openpaymentsdata.cms.gov/resource/7jmr-y7em.json\",\r\n\t\t\t\"research\":\"https://openpaymentsdata.cms.gov/resource/347h-8q4c.json\",\r\n\t\t\t\"ownership\":\"https://openpaymentsdata.cms.gov/resource/9dan-a5me.json\",\r\n\t\t\t\"pi\":\"https://openpaymentsdata.cms.gov/resource/347h-8q4c.json\"\r\n\t\t},\r\n\t\t\"2014\":{\r\n\t\t\t\"general\":\"https://openpaymentsdata.cms.gov/resource/y4mv-5s9j.json\",\r\n\t\t\t\"research\":\"https://openpaymentsdata.cms.gov/resource/qsvx-wh3i.json\",\r\n\t\t\t\"ownership\":\"https://openpaymentsdata.cms.gov/resource/rrmg-ctbf.json\",\r\n\t\t\t\"pi\":\"https://openpaymentsdata.cms.gov/resource/qsvx-wh3i.json\"\t\r\n\t\t}\r\n\t},\r\n\t\"params\":{\r\n\t\t\"physician\":{\r\n\t\t\t\"general\":\"&$select=dispute_status_for_publication,sum(total_amount_of_payment_usdollars), count(record_id)&$group=dispute_status_for_publication&$where=physician_profile_id='\",\r\n\t\t\t\"research\":\"&$select=dispute_status_for_publication,sum(total_amount_of_payment_usdollars), count(record_id)&$group=dispute_status_for_publication&$where=physician_profile_id='\",\r\n\t\t\t\"ownership\":\"&$select=dispute_status_for_publication,sum(total_amount_invested_usdollars),sum(value_of_interest), count(record_id)&$group=dispute_status_for_publication&$where=physician_profile_id='\"\r\n\t\t}\r\n\t}\r\n}\r\n```\r\n",
-  "readmeFilename": "README.md",
-  "_id": "open-payments@0.0.3",
   "_shasum": "950722992c58066749bb86b974f492032523094e",
   "_from": "open-payments@*",
   "dependencies": {
