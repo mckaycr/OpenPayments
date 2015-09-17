@@ -92,3 +92,5 @@ This method provides a summed total of all stats for a particular entity which s
 	- `physician`
 	- `hospital`
 	- `company`
+
+<sup><b>Affiliation Disclosure</b>:  This project and it's contributors are in no way affiliated with the Open Payments system, Sunshine Act, or ACA.  No compensation is received for work performed on this project.   This project is quite simply a tool for its contributors to hone in on their JavaScripting skills.  Hope you enjoy it, and feel free to contribute.</sup>
