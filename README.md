@@ -50,7 +50,6 @@ Results:
 
 ## Prerequisites
 - Node is required
-- At the moment, and Socrata login, and app token.  This won't be required later
 - A config.json file after installation that looks like this
 ```
 {

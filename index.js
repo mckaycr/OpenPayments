@@ -1,12 +1,30 @@
+process.env.SUPPRESS_NO_CONFIG_WARNING = 'y';
 var request = require('sync-request')
-	,config = require('config');
+	config = require('config')
+	,fs = require('fs')
+	,path=require('path');
 
 module.exports = {
 	summary : function(options){
-		main(options);
-		return Covered_Recipient
-	}	 	
+		if(config.has('datasets')==false){initialize()}
+		else{
+			main(options);
+			return Covered_Recipient;
+		}
+	}
 };
+// Checks for config files, else creates them on the fly.
+function initialize(){
+	var config_file = path.dirname(process.mainModule.filename)+path.sep+'config'+path.sep+'default.json'
+	var default_config = path.dirname(process.mainModule.filename)+path.sep+'node_modules'+path.sep+'open-payments'+path.sep+'config'+path.sep+'default.json'
+	fs.access(config_file,fs.R_OK | fs.W_OK,function(err){
+		if(err){
+			fs.mkdir(path.dirname(process.mainModule.filename)+path.sep+'config')
+			fs.writeFileSync(config_file, fs.readFileSync(default_config));
+			console.log('NOTICE: Creating default config file.  Please review "'+config_file+ '"\nNOTICE: You may need to run your app again')
+		}
+	})
+}
 // This object will be returned with all the results from the six queries
 var Covered_Recipient = {}
 // This is the main function
