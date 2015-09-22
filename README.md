@@ -50,47 +50,23 @@ Results:
 
 ## Prerequisites
 - Node is required
-- A config.json file after installation that looks like this
-```
-{
-	"auth":{
-		"user":"YOUR-SOCRATA-USERNAME",
-		"key":"YOUR-PASSWORD",
-		"app_token":"YOUR-APP-TOKEN"
-	},
-	"datasets":{
-		"2013":{
-			"general":"https://openpaymentsdata.cms.gov/resource/7jmr-y7em.json",
-			"research":"https://openpaymentsdata.cms.gov/resource/347h-8q4c.json",
-			"ownership":"https://openpaymentsdata.cms.gov/resource/9dan-a5me.json",
-			"pi":"https://openpaymentsdata.cms.gov/resource/347h-8q4c.json"
-		},
-		"2014":{
-			"general":"https://openpaymentsdata.cms.gov/resource/y4mv-5s9j.json",
-			"research":"https://openpaymentsdata.cms.gov/resource/qsvx-wh3i.json",
-			"ownership":"https://openpaymentsdata.cms.gov/resource/rrmg-ctbf.json",
-			"pi":"https://openpaymentsdata.cms.gov/resource/qsvx-wh3i.json"	
-		}
-	},
-	"params":{
-		"physician":{
-			"general":"&$select=dispute_status_for_publication,sum(total_amount_of_payment_usdollars), count(record_id)&$group=dispute_status_for_publication&$where=physician_profile_id='",
-			"research":"&$select=dispute_status_for_publication,sum(total_amount_of_payment_usdollars), count(record_id)&$group=dispute_status_for_publication&$where=physician_profile_id='",
-			"ownership":"&$select=dispute_status_for_publication,sum(total_amount_invested_usdollars),sum(value_of_interest), count(record_id)&$group=dispute_status_for_publication&$where=physician_profile_id='"
-		}
-	}
-}
-```
-## Methods
----
-## summary(options);
+
+##Methods
+
+### summary(options);
 
 This method provides a summed total of all stats for a particular entity which should match what the curent search tool displays in the summary details for a particular entity.  This is with the exception of teaching hospitals which may have a separate ID per program year.  This module doesn't yet find all associated ID's.  Maybe in the furture
 
-- `id` - This is the open payments id for the entity you want a summary for
-- `type` - This is the entity type you want a summary for.  Available options for this is:
+- `id` - <b>Required</b> This is the open payments id for the entity you want a summary for
+- `type` - <b>Required</b> This is the entity type you want a summary for.  Available options for this is:
 	- `physician`
 	- `hospital`
 	- `company`
+
+### information(options);
+
+This method will provide all the information related to the entity being queried, like entity name, address, any licenses associated if applicable.  This is automatically included in the summary method, but just for fun I added it so that you could call it by itself too.
+
+The options for this method are the same for the summary.
 
 <sup><b>Affiliation Disclosure</b>:  This project and it's contributors are in no way affiliated with the Open Payments system, Sunshine Act, or ACA.  No compensation is received for work performed on this project.   This project is quite simply a tool for its contributors to hone in on their JavaScripting skills.  Hope you enjoy it, and feel free to contribute.</sup>
