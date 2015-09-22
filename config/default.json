@@ -1,8 +1,8 @@
 {
 	"auth":{
-		"user":"YOUR-USER-NAME",
-		"key":"YOUR-PASSWORD",
-		"app_token":"APP-TOKEN"
+		"user":"",
+		"key":"",
+		"app_token":""
 	},
 	"datasets":{
 		"2013":{
@@ -16,6 +16,18 @@
 			"research":"https://openpaymentsdata.cms.gov/resource/qsvx-wh3i.json",
 			"ownership":"https://openpaymentsdata.cms.gov/resource/rrmg-ctbf.json",
 			"pi":"https://openpaymentsdata.cms.gov/resource/qsvx-wh3i.json"	
+		}
+	},
+	"supplement":{
+		"data":{
+			"physician":"https://openpaymentsdata.cms.gov/resource/search-physician-06302015.json",
+			"company":"https://openpaymentsdata.cms.gov/resource/search-company-06302015.json",
+			"hospital":"https://openpaymentsdata.cms.gov/resource/search-hospital-06302015.json"
+		},
+		"params":{
+			"physician":"?$where=physician_profile_id=",
+			"company":"?$where=amgpo_making_payment_id=",
+			"hospital":"?$where=teaching_hospital_id="
 		}
 	},
 	"params":{
