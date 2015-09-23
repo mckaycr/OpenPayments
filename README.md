@@ -11,7 +11,7 @@ npm install open-payments
 ```
 ## Example
 ```
-var data = require('individual');
+var data = require('open-payments');
 options = {
  'id':268527  // This is a physician_profile_id in open payments
  ,'type': 'physician'  //  This is an entity type, later I will allow for more
