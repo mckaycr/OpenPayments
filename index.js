@@ -1,7 +1,7 @@
 process.env.SUPPRESS_NO_CONFIG_WARNING = 'y'; // npm install open-payments doesn't create a config file... yet
 module.exports = {
 	summary : function(options){
-		if(config.has('datasets')==false){initialize()}  // Create a new config.json if none exists
+		if(config.has('datasets')===false){initialize()}  // Create a new config.json if none exists
 		else{
 			entityInfo(options);
 			main(options);
@@ -9,7 +9,7 @@ module.exports = {
 		}
 	},
 	information : function(options){
-		if(config.has('datasets')==false){initialize()}  // Create a new config.json if none exists
+		if(config.has('datasets')===false){initialize()}  // Create a new config.json if none exists
 		else{
 			entityInfo(options);
 			return Covered_Recipient;
@@ -90,16 +90,16 @@ function buildArr(entity_type){
 	var datasets = config.get('datasets')  
 	var temp = [];
 	for (var key in datasets) {
-	   if (datasets.hasOwnProperty(key)) {
-	       var obj = datasets[key];
-	        for (var prop in obj) {
-	       		if(entity_type!='hospital'||prop!='ownership'){
-		          if(obj.hasOwnProperty(prop)){
-		            temp.push([key,prop,obj[prop]]);
-		          }
-	     	 }
-	       }
-	    }
+        if (datasets.hasOwnProperty(key)) {
+            var obj = datasets[key];
+            for (var prop in obj) {
+                if(entity_type!='hospital'||prop!='ownership'){
+                    if(obj.hasOwnProperty(prop)){
+                        temp.push([key,prop,obj[prop]]);
+                    }
+                }
+            }
+        }
 	}
 	return temp
 }
@@ -127,14 +127,14 @@ function buildURI(){
 // *******************************************
 function getResults(){
 	var options = {
-		    method: 'GET'
-		    ,uri: buildURI()
-		    ,gzip: true
-		    ,json: true
-		    ,auth: {
-			    user: config.get('auth.user')
-			    ,pass: config.get('auth.key')
-		       	,sendImmediately: true
+            method: 'GET'
+            ,uri: buildURI()
+            ,gzip: true
+            ,json: true
+            ,auth: {
+                user: config.get('auth.user')
+                ,pass: config.get('auth.key')
+                ,sendImmediately: true
 			}
 		};
 	var results = request(options.method,options.uri,options).getBody('utf8')
@@ -153,26 +153,26 @@ function updateCR(data){
 		if(!(Covered_Recipient.hasOwnProperty(temp_params.program_year))){Covered_Recipient[temp_params.program_year]= {}}
 		if(!(Covered_Recipient[temp_params.program_year].hasOwnProperty(temp_params.payment_type))){Covered_Recipient[temp_params.program_year][temp_params.payment_type]= {}}
 		arrResults.forEach(function(element){
-			if(Covered_Recipient[temp_params.program_year][temp_params.payment_type].count==null){Covered_Recipient[temp_params.program_year][temp_params.payment_type].count = Number(element.count_record_id)}
+			if(Covered_Recipient[temp_params.program_year][temp_params.payment_type].count===null){Covered_Recipient[temp_params.program_year][temp_params.payment_type].count = Number(element.count_record_id)}
 			else{Covered_Recipient[temp_params.program_year][temp_params.payment_type].count = Covered_Recipient[temp_params.program_year][temp_params.payment_type].count + Number(element.count_record_id)}
 			switch(temp_params.payment_type){
 				case 'ownership':
-					if(Covered_Recipient[temp_params.program_year][temp_params.payment_type].interest==null){Covered_Recipient[temp_params.program_year][temp_params.payment_type].interest = Number(element.sum_value_of_interest)}
+					if(Covered_Recipient[temp_params.program_year][temp_params.payment_type].interest===null){Covered_Recipient[temp_params.program_year][temp_params.payment_type].interest = Number(element.sum_value_of_interest)}
 					else{Covered_Recipient[temp_params.program_year][temp_params.payment_type].interest = Covered_Recipient[temp_params.program_year][temp_params.payment_type].interest + Number(element.sum_value_of_interest)}
-					if(Covered_Recipient[temp_params.program_year][temp_params.payment_type].value==null){Covered_Recipient[temp_params.program_year][temp_params.payment_type].value = Number(element.sum_total_amount_invested_usdollars)}
+					if(Covered_Recipient[temp_params.program_year][temp_params.payment_type].value===null){Covered_Recipient[temp_params.program_year][temp_params.payment_type].value = Number(element.sum_total_amount_invested_usdollars)}
 					else{Covered_Recipient[temp_params.program_year][temp_params.payment_type].value = Covered_Recipient[temp_params.program_year][temp_params.payment_type].value + Number(element.sum_total_amount_invested_usdollars)}
 					break;
 				default:
-					if(Covered_Recipient[temp_params.program_year][temp_params.payment_type].value==null){Covered_Recipient[temp_params.program_year][temp_params.payment_type].value = Number(element.sum_total_amount_of_payment_usdollars)}
+					if(Covered_Recipient[temp_params.program_year][temp_params.payment_type].value===null){Covered_Recipient[temp_params.program_year][temp_params.payment_type].value = Number(element.sum_total_amount_of_payment_usdollars)}
 					else{Covered_Recipient[temp_params.program_year][temp_params.payment_type].value = Covered_Recipient[temp_params.program_year][temp_params.payment_type].value + Number(element.sum_total_amount_of_payment_usdollars)}
 			}
 			switch(element.dispute_status_for_publication){
 				case 'Yes':
-					if(Covered_Recipient[temp_params.program_year].disputes==null){Covered_Recipient[temp_params.program_year].disputes = Number(element.count_record_id)}
+					if(Covered_Recipient[temp_params.program_year].disputes===null){Covered_Recipient[temp_params.program_year].disputes = Number(element.count_record_id)}
 					else{Covered_Recipient[temp_params.program_year].disputes = Covered_Recipient[temp_params.program_year].disputes + Number(element.count_record_id)}
 					break;
 				case 'No':
-					if(Covered_Recipient[temp_params.program_year].undisputes==null){Covered_Recipient[temp_params.program_year].undisputes = Number(element.count_record_id)}
+					if(Covered_Recipient[temp_params.program_year].undisputes===null){Covered_Recipient[temp_params.program_year].undisputes = Number(element.count_record_id)}
 					else{Covered_Recipient[temp_params.program_year].undisputes = Covered_Recipient[temp_params.program_year].undisputes + Number(element.count_record_id)}
 					break;
 			}
