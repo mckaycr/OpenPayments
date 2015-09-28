@@ -18,10 +18,10 @@ module.exports = {
 
 };
 var request = require('sync-request')
-	config = require('config')
+	,config = require('config')
 	,fs = require('fs')
 	,path=require('path');
-var Covered_Recipient = {} // This object is the main output of this module.
+var Covered_Recipient = {}; // This object is the main output of this module.
 // *******************************************
 // * initialize() is used to (for now) to create a default
 // * config file if none exists.  I'd like to move this to 
@@ -29,15 +29,15 @@ var Covered_Recipient = {} // This object is the main output of this module.
 // * have to explore NPM scripts more for that I think.
 // *******************************************
 function initialize(){
-	var destination_file = path.dirname(process.mainModule.filename)+path.sep+'config'+path.sep+'default.json'
-	var source_file = path.dirname(process.mainModule.filename)+path.sep+'node_modules'+path.sep+'open-payments'+path.sep+'config'+path.sep+'default.json'
+	var destination_file = path.dirname(process.mainModule.filename)+path.sep+'config'+path.sep+'default.json';
+	var source_file = path.dirname(process.mainModule.filename)+path.sep+'node_modules'+path.sep+'open-payments'+path.sep+'config'+path.sep+'default.json';
 	fs.access(destination_file,fs.R_OK | fs.W_OK,function(err){
 		if(err){
-			fs.mkdir(path.dirname(process.mainModule.filename)+path.sep+'config')
+			fs.mkdir(path.dirname(process.mainModule.filename)+path.sep+'config');
 			fs.writeFileSync(destination_file, fs.readFileSync(source_file));
-			console.log('NOTICE: Creating default config file.  Please review "'+destination_file+ '"\nNOTICE: You may need to run your app again')
+			console.log('NOTICE: Creating default config file.  Please review "'+destination_file+ '"\nNOTICE: You may need to run your app again');
 		}
-	})
+	});
 }
 // *******************************************
 // * This function is used to retrieve entity info
@@ -48,19 +48,19 @@ function initialize(){
 // *******************************************
 function entityInfo(options){
 	var options = {
-	    method: 'GET'
-	    ,uri: config.get("supplement.data." + options.type)+config.get("supplement.params."+options.type)+"'"+options.id+"'"
-	    ,gzip: true
-	    ,json: true
-	    ,auth: {
-		    user: config.get('auth.user')
-		    ,pass: config.get('auth.key')
-	       	,sendImmediately: true
+        method: 'GET'
+        ,uri: config.get("url")+config.get("supplement.data." + options.type)+config.get("supplement.params."+options.type)+"'"+options.id+"'"
+        ,gzip: true
+        ,json: true
+        ,auth: {
+            user: config.get('auth.user')
+            ,pass: config.get('auth.key')
+            ,sendImmediately: true
 		}
 	};
-	var results = JSON.parse(request(options.method,options.uri,options).getBody('utf8'))
+	var results = JSON.parse(request(options.method,options.uri,options).getBody('utf8'));
 	for(var key in results[0]){
-		Covered_Recipient[key]=results[0][key]
+		Covered_Recipient[key]=results[0][key];
 	}
 }
 // *******************************************
@@ -75,9 +75,9 @@ function main(options){
 	//Covered_Recipient[objProp] = options.id  // sets the covered recipient type based on user input
 	datasets.forEach(function(e){
 		// These are going to be frequently used parameters for most of the sub routines.  Looking for a better way to do this.
-		temp_params = {program_year:e[0],payment_type:e[1],entity_id:options.id,entity_type:options.type}
+		temp_params = {program_year:e[0],payment_type:e[1],entity_id:options.id,entity_type:options.type};
 		getResults();  // technically this function is where all the real work gets done
-	})
+	});
 }
 // *******************************************
 // * This function reads the config file and stores 
@@ -87,7 +87,7 @@ function main(options){
 // * and the dataset URL with no paramerters
 // *******************************************
 function buildArr(entity_type){
-	var datasets = config.get('datasets')  
+	var datasets = config.get('datasets');
 	var temp = [];
 	for (var key in datasets) {
         if (datasets.hasOwnProperty(key)) {
@@ -95,13 +95,13 @@ function buildArr(entity_type){
             for (var prop in obj) {
                 if(entity_type!='hospital'||prop!='ownership'){
                     if(obj.hasOwnProperty(prop)){
-                        temp.push([key,prop,obj[prop]]);
+                        temp.push([key,prop,config.get("url")+obj[prop]]);
                     }
                 }
             }
         }
 	}
-	return temp
+	return temp;
 }
 // *******************************************
 // * This function is going to take all the dataset
@@ -112,11 +112,10 @@ function buildArr(entity_type){
 function buildURI(){
 	switch(temp_params.payment_type){
 		case 'pi':
-			return config.get("datasets." + temp_params.program_year + "." + temp_params.payment_type) + "?$$app_token="+config.get('auth.app_token')+"&$group=dispute_status_for_publication&$select=dispute_status_for_publication,sum(total_amount_of_payment_usdollars),%20count(record_id)&$where=(physician_profile_id IS NULL OR physician_profile_id!=%27"+temp_params.entity_id+"%27)%20AND%20(principal_investigator_1_profile_id=%27"+temp_params.entity_id+"%27%20OR%20principal_investigator_2_profile_id=%27"+temp_params.entity_id+"%27%20OR%20principal_investigator_3_profile_id=%27"+temp_params.entity_id+"%27%20OR%20principal_investigator_4_profile_id=%27"+temp_params.entity_id+"%27%20OR%20principal_investigator_5_profile_id=%27"+temp_params.entity_id+"%27)"
+			return config.get("url")+config.get("datasets." + temp_params.program_year + "." + temp_params.payment_type) + "?$$app_token="+config.get('auth.app_token')+"&$group=dispute_status_for_publication&$select=dispute_status_for_publication,sum(total_amount_of_payment_usdollars),%20count(record_id)&$where=(physician_profile_id IS NULL OR physician_profile_id!=%27"+temp_params.entity_id+"%27)%20AND%20(principal_investigator_1_profile_id=%27"+temp_params.entity_id+"%27%20OR%20principal_investigator_2_profile_id=%27"+temp_params.entity_id+"%27%20OR%20principal_investigator_3_profile_id=%27"+temp_params.entity_id+"%27%20OR%20principal_investigator_4_profile_id=%27"+temp_params.entity_id+"%27%20OR%20principal_investigator_5_profile_id=%27"+temp_params.entity_id+"%27)"
 			break;
 		default:
-
-			return config.get("datasets." + temp_params.program_year + "." + temp_params.payment_type) + "?$$app_token="+config.get('auth.app_token')+config.get('params.'+temp_params.entity_type+'.'+temp_params.payment_type) + temp_params.entity_id +"'"
+			return config.get("url")+config.get("datasets." + temp_params.program_year + "." + temp_params.payment_type) + "?$$app_token="+config.get('auth.app_token')+config.get('params.'+temp_params.payment_type) + config.get('supplement.params.'+temp_params.entity_type).substring(1) + "'"+temp_params.entity_id +"'";
 	}
 }
 // *******************************************
@@ -127,17 +126,17 @@ function buildURI(){
 // *******************************************
 function getResults(){
 	var options = {
-            method: 'GET'
-            ,uri: buildURI()
-            ,gzip: true
-            ,json: true
-            ,auth: {
-                user: config.get('auth.user')
-                ,pass: config.get('auth.key')
-                ,sendImmediately: true
-			}
-		};
-	var results = request(options.method,options.uri,options).getBody('utf8')
+        method: 'GET'
+        ,uri: buildURI()
+        ,gzip: true
+        ,json: true
+        ,auth: {
+        user: config.get('auth.user')
+            ,pass: config.get('auth.key')
+            ,sendImmediately: true
+        }
+    };
+	var results = request(options.method,options.uri,options).getBody('utf8');
 	updateCR(results);
 }
 // *******************************************
@@ -148,7 +147,7 @@ function getResults(){
 // * module.
 // *******************************************
 function updateCR(data){
-	var arrResults = JSON.parse(data)
+	var arrResults = JSON.parse(data);
 	if(arrResults.length>0){
 		if(!(Covered_Recipient.hasOwnProperty(temp_params.program_year))){Covered_Recipient[temp_params.program_year]= {}}
 		if(!(Covered_Recipient[temp_params.program_year].hasOwnProperty(temp_params.payment_type))){Covered_Recipient[temp_params.program_year][temp_params.payment_type]= {}}
@@ -176,6 +175,6 @@ function updateCR(data){
 					else{Covered_Recipient[temp_params.program_year].undisputes = Covered_Recipient[temp_params.program_year].undisputes + Number(element.count_record_id)}
 					break;
 			}
-		})
+		});
 	}
 }
