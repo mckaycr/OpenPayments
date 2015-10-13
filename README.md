@@ -108,9 +108,9 @@ This method returns all of the above into one object which will look like this:
 
 ##Credit
 
--[Open Payments - Centers of Medicare and Medicaid](https://openpaymentsdata.cms.gov/)
--[Socrata](http://dev.socrata.com/foundry/#/openpaymentsdata.cms.gov/y4mv-5s9j)
--[sync-request](https://www.npmjs.com/package/sync-request)
--[config](https://www.npmjs.com/package/config)
+- [Open Payments - Centers of Medicare and Medicaid](https://openpaymentsdata.cms.gov/)
+- [Socrata](http://dev.socrata.com/foundry/#/openpaymentsdata.cms.gov/y4mv-5s9j)
+- [sync-request](https://www.npmjs.com/package/sync-request)
+- [config](https://www.npmjs.com/package/config)
 
 >***Affiliation Disclosure***: *This project and it's contributors are in no way affiliated with the Open Payments system, Sunshine Act, or ACA.  No compensation is received for work performed on this project.   This project is quite simply a tool for its contributors to hone in on their JavaScripting skills.  Hope you enjoy it, and feel free to contribute.*
