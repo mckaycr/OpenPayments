@@ -113,4 +113,8 @@ This method returns all of the above into one object which will look like this:
 - [sync-request](https://www.npmjs.com/package/sync-request)
 - [config](https://www.npmjs.com/package/config)
 
+##Disclaimer
+
+I added universal analytics to my module so that I could get a better idea of what it was being used for, and metrics for how I could improve it's performance.  Hopefully that doesn't deter anyone from continuing use.  You could always go in and take it out.  I will add some optOut process soon. Hopefully it won't be needed :
+
 >***Affiliation Disclosure***: *This project and it's contributors are in no way affiliated with the Open Payments system, Sunshine Act, or ACA.  No compensation is received for work performed on this project.   This project is quite simply a tool for its contributors to hone in on their JavaScripting skills.  Hope you enjoy it, and feel free to contribute.*
