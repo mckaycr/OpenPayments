@@ -1,6 +1,6 @@
 {
   "name": "open-payments",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "This is meant to be a module that other developers can use to build search tools interfaces for Open Payments data.",
   "main": "index.js",
   "scripts": {
@@ -32,6 +32,8 @@
   "_from": "open-payments@*",
   "dependencies": {
     "config": "^1.16.0",
-    "sync-request": "^2.0.1"
+    "exectimer": "^1.1.0",
+    "sync-request": "^2.0.1",
+    "universal-analytics": "^0.3.9"
   }
 }
