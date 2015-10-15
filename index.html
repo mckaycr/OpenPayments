@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>open-payments by mckaycr</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>open-payments</h1>
+        <p>this node module can be used to create a search interface for displaying Open Payments data published by the Centers for Medicaid and Medicare</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/mckaycr/open-payments" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/mckaycr/open-payments/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/mckaycr/open-payments/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a id="openpayments" class="anchor" href="#openpayments" aria-hidden="true"><span class="octicon octicon-link"></span></a>OpenPayments</h1>
+
+<p>This project is for creating re-usable node modules for querying Open Payments data via the Socrata API.</p>
+
+<p>This is meant to be a module that other developers can use to build search tools for Open Payments data.</p>
+
+<h2>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h2>
+
+<p>This package is published in NPM so to install you just need to do the following:</p>
+
+<pre><code>npm install open-payments
+</code></pre>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<pre><code>var data = require('open-payments');
+options = {
+ 'id':268527  // This is a physician_profile_id in open payments
+ ,'type': 'physician'  //  This is an entity type, later I will allow for more
+}
+
+var physician = data.query(options);  // This initiates the query
+console.log('Results: ");
+console.log(physician);
+// or
+console.log('Results: ");
+console.log(physician[2014].general.value)
+</code></pre>
+
+<h2>
+<a id="results" class="anchor" href="#results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results</h2>
+
+<pre><code>Results:
+{ '2013':
+   { general: { value: 31931.57, count: 81 },
+     undisputes: 86,
+     research: { value: 1525, count: 2 },
+     ownership: { value: 127999.05, count: 3, interest: 67452.24 },
+     pi: { value: 33510, count: 10 } },
+  '2014':
+   { general: { value: 1172184.0999999999, count: 203 },
+     undisputes: 202,
+     disputes: 6,
+     research: { value: 5000, count: 1 },
+     ownership: { value: 260228.14, count: 4, interest: 262942.14 },
+     pi: { value: 67492.76, count: 31 } },
+  physician_id: 268527 }
+</code></pre>
+
+<p>or</p>
+
+<pre><code>Results:
+1172184.0999999999
+</code></pre>
+
+<h2>
+<a id="prerequisites" class="anchor" href="#prerequisites" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
+
+<ul>
+<li>Node is required</li>
+</ul>
+
+<h2>
+<a id="methods" class="anchor" href="#methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Methods</h2>
+
+<p>Unless otherwise specified, available options for all methods are:</p>
+
+<ul>
+<li>
+<code>id</code> - <strong>Required</strong> This is the open payments id for the entity you want a summary for</li>
+<li>
+<code>type</code> - <strong>Required</strong> This is the entity type you want a summary for.  Available options for this is:
+
+<ul>
+<li><code>physician</code></li>
+<li><code>hospital</code></li>
+<li><code>company</code></li>
+</ul>
+</li>
+</ul>
+
+<h3>
+<a id="summaryoptions" class="anchor" href="#summaryoptions" aria-hidden="true"><span class="octicon octicon-link"></span></a>summary(options);</h3>
+
+<p>This method provides a summed total of all stats for a particular entity which should match what the current search tool displays in the summary details for a particular entity.  This is with the exception of teaching hospitals which may have a separate ID per program year.  This module doesn't yet find all associated ID's.  Maybe in the furture</p>
+
+<h3>
+<a id="informationoptions" class="anchor" href="#informationoptions" aria-hidden="true"><span class="octicon octicon-link"></span></a>information(options);</h3>
+
+<p>This method will provide all the information related to the entity being queried, like entity name, address, any licenses associated if applicable.  This is automatically included in the summary method, but just for fun I added it so that you could call it by itself too.</p>
+
+<h3>
+<a id="recordsoptions" class="anchor" href="#recordsoptions" aria-hidden="true"><span class="octicon octicon-link"></span></a>records(options);</h3>
+
+<p>This method will return all records as an array within the returned entity object.</p>
+
+<h3>
+<a id="detailsoptions" class="anchor" href="#detailsoptions" aria-hidden="true"><span class="octicon octicon-link"></span></a>details(options);</h3>
+
+<p>This method returns all of the above into one object which will look like this:</p>
+
+<pre><code>{ '2013':
+   { general: { records: [Object], count: 36, value: 15282.36 },
+     research: { records: [Object], count: 1, value: 215.92 },
+     ownership: { records: [Object], count: 1, interest: 62621, value: 62621 },
+     pi: { records: [Object] },
+     undisputes: 38 },
+  '2014':
+   { general: { records: [Object], count: 105, value: 54205.43 },
+     research: { records: [Object], count: 1, value: 18060 },
+     ownership: { records: [Object], count: 1, interest: 62621, value: 62621 },
+     pi: { records: [Object], count: 41, value: 277818.26 },
+     undisputes: 146,
+     disputes: 2 },
+  physician_profile_address_line_1: '800 Prudential Dr',
+  physician_profile_address_line_2: 'Tower B 11th Floor',
+  physician_profile_city: 'Jacksonville',
+  physician_profile_country_name: 'United States',
+  physician_profile_first_name: 'RICARDO',
+  physician_profile_id: '242650',
+  physician_profile_last_name: 'HANEL',
+  physician_profile_license_state_code_1: 'NY',
+  physician_profile_license_state_code_2: 'FL',
+  physician_profile_license_state_code_3: 'AZ',
+  physician_profile_primary_specialty: 'Allopathic &amp; Osteopathic Physicians/Neurological Surgery',
+  physician_profile_state: 'FL',
+  physician_profile_zipcode: '322078202' }
+</code></pre>
+
+<h2>
+<a id="credit" class="anchor" href="#credit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Credit</h2>
+
+<ul>
+<li><a href="https://openpaymentsdata.cms.gov/">Open Payments - Centers of Medicare and Medicaid</a></li>
+<li><a href="http://dev.socrata.com/foundry/#/openpaymentsdata.cms.gov/y4mv-5s9j">Socrata</a></li>
+<li><a href="https://www.npmjs.com/package/sync-request">sync-request</a></li>
+<li><a href="https://www.npmjs.com/package/config">config</a></li>
+</ul>
+
+<blockquote>
+<p><strong><em>Affiliation Disclosure</em></strong>: <em>This project and it's contributors are in no way affiliated with the Open Payments system, Sunshine Act, or ACA.  No compensation is received for work performed on this project.   This project is quite simply a tool for its contributors to hone in on their JavaScripting skills.  Hope you enjoy it, and feel free to contribute.</em></p>
+</blockquote>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/mckaycr">mckaycr</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-21664895-11");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
