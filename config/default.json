@@ -27,7 +27,7 @@
 		},
 		"params":{
 			"physician":"?$where=physician_profile_id=",
-			"company":"?$where=amgpo_making_payment_id=",
+			"company":"?$where=applicable_manufacturer_or_applicable_gpo_making_payment_id=",
 			"hospital":"?$where=teaching_hospital_id="
 		}
 	},
