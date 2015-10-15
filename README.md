@@ -51,7 +51,7 @@ Results:
 ## Prerequisites
 - Node is required
 
-##Methods
+## Methods
 
 Unless otherwise specified, available options for all methods are:
 
@@ -106,14 +106,14 @@ This method returns all of the above into one object which will look like this:
   physician_profile_zipcode: '322078202' }
 ```
 
-##Credit
+## Credit
 
 - [Open Payments - Centers of Medicare and Medicaid](https://openpaymentsdata.cms.gov/)
 - [Socrata](http://dev.socrata.com/foundry/#/openpaymentsdata.cms.gov/y4mv-5s9j)
 - [sync-request](https://www.npmjs.com/package/sync-request)
 - [config](https://www.npmjs.com/package/config)
 
-##Disclaimer
+## Disclaimer
 
 I added universal analytics to my module so that I could get a better idea of what it was being used for, and metrics for how I could improve it's performance.  Hopefully that doesn't deter anyone from continuing use.  You could always go in and take it out.  I will add some optOut process soon. Hopefully it won't be needed :
 
