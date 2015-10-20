@@ -1,4 +1,4 @@
-# OpenPayments
+# [OpenPayments](http://mckaycr.github.io/open-payments)
 
 This project is for creating re-usable node modules for querying Open Payments data via the Socrata API.
 
