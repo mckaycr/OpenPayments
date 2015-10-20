@@ -1,7 +1,7 @@
 ## 0.4.1 / 2015-10-15
   - Update package.json
   - Update README.md
-    correcting formatting in headers
+  - correcting formatting in headers
 
 ## 0.4.0 / 2015-10-15
   - changed amgpo identifier
