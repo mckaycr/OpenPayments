@@ -19,7 +19,7 @@ describe('open-payments',function(){
 	});
 	describe('summary()',function(){
         it('It should return open payments summary stats about a physician', function(done){
-            this.timeout(3000);
+            this.timeout(10000);
             var options = {'id':'268527','type': 'physician'};
             var physician =  cr.summary(options);
             expect(physician['2013'].general).to.have.a.property('count',81);
@@ -28,7 +28,7 @@ describe('open-payments',function(){
 	});
 	describe('records()',function(){
         it('It should return open payments records about a physician', function(done){
-            this.timeout(3000);
+            this.timeout(10000);
             var options = {'id':'268527','type': 'physician'};
             var physician =  cr.records(options);
             expect(physician['2013'].general.records).to.have.a.property('length',81);
@@ -37,7 +37,7 @@ describe('open-payments',function(){
 	});
 	describe('details()',function(){
         it('It should return all available information about a physician', function(done){
-            this.timeout(5000);
+            this.timeout(10000);
             var options = {'id':'268527','type': 'physician'};
             var physician =  cr.details(options);
             expect(physician).to.have.a.property('physician_profile_id', options.id);
