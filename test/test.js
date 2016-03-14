@@ -27,4 +27,13 @@ describe('open-payments',function(){
 			});
 		});
 	});
+	describe('summary()',function(){
+        it('It should build an array of queries based on the provided entity object', function(done){
+            var options = {'id':'268527','type': 'physician'};
+            cr.summary(options, function(err, data){
+                console.log(data);
+            });
+            done()
+        });
+	});
 });
