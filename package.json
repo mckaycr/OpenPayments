@@ -4,7 +4,7 @@
   "description": "This is meant to be a module that other developers can use to build search tools interfaces for Open Payments data.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -35,5 +35,9 @@
     "exectimer": "^1.1.0",
     "sync-request": "^2.0.1",
     "universal-analytics": "^0.3.9"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
   }
 }
