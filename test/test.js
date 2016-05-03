@@ -28,12 +28,29 @@ describe('open-payments',function(){
 		});
 	});
 	describe('summary()',function(){
-        it('It should build an array of queries based on the provided entity object', function(done){
+        it('It should return data from for physician from every program year and every dataset where data exists', function(done){
             var options = {'id':'268527','type': 'physician'};
+            this.timeout(15000)
             cr.summary(options, function(err, data){
-                console.log(data);
+                expect(data[0].data[0]).to.have.a.property('count_record_id','81')
+                done()
             });
-            done()
+        });
+        it('It should return data from for company from every program year and every dataset where data exists', function(done){
+            var options = {'id':'100000000286','type': 'company'};
+            this.timeout(15000)
+            cr.summary(options, function(err, data){
+                expect(data[0].data[0]).to.have.a.property('count_record_id','176265')
+                done()
+            });
+        });
+        it('It should return data from for hospital from every program year and every dataset where data exists', function(done){
+            var options = {'id':'644','type': 'hospital'};
+            this.timeout(15000)
+            cr.summary(options, function(err, data){
+                expect(data[0].data[0]).to.have.a.property('count_record_id','45')
+                done()
+            });
         });
 	});
 });

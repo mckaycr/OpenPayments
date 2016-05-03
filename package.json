@@ -31,7 +31,8 @@
   "_shasum": "950722992c58066749bb86b974f492032523094e",
   "_from": "open-payments@*",
   "dependencies": {
-    "request": "^2.69.0"
+    "request": "^2.69.0",
+    "soda-js": "^0.2.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",
