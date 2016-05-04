@@ -53,30 +53,30 @@ describe('open-payments',function(){
             });
         });
 	});
-	// describe('records()',function(){
-	// 	it('It should return all records for a physician', function(done){
-	// 		var options = {'id':'268527','type': 'physician'};
-	// 		this.timeout(0)
-	// 		cr.records(options, function(err,data){
-	// 			expect(data[2013].general.records.length).to.equal(81)
-	// 			done();
-	// 		})
-	// 	})
-	// 	it('It should return all records for a company', function(done){
-	// 		var options = {'id':'100000000286','type': 'company'};
-	// 		this.timeout(100000000)
-	// 		cr.records(options, function(err,data){
-	// 			expect(data[2013].general.records.length).to.equal(176273)
-	// 			done();
-	// 		})
-	// 	})
-	// 	it('It should return all records for a hospital', function(done){
-	// 		var options = {'id':'644','type': 'hospital'};
-	// 		this.timeout(0)
-	// 		cr.records(options, function(err,data){
-	// 			expect(data[2013].general.records.length).to.equal(49)
-	// 			done();
-	// 		})
-	// 	})
-	// })
+	describe('records()',function(){
+		it('It should return all records for a physician', function(done){
+			var options = {'id':'268527','type': 'physician'};
+			this.timeout(0)
+			cr.records(options, function(err,data){
+				expect(data[2013].general.records.length).to.equal(81)
+				done();
+			})
+		})
+		it('It should return all records for a company', function(done){
+			var options = {'id':'100000000286','type': 'company'};
+			this.timeout(100000000)
+			cr.records(options, function(err,data){
+				expect(data[2013].general.records.length).to.equal(176273)
+				done();
+			})
+		})
+		it('It should return all records for a hospital', function(done){
+			var options = {'id':'644','type': 'hospital'};
+			this.timeout(0)
+			cr.records(options, function(err,data){
+				expect(data[2013].general.records.length).to.equal(49)
+				done();
+			})
+		})
+	})
 });
