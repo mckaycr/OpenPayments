@@ -32,9 +32,9 @@
 		}
 	},
 	"selects":{
-		"general":"dispute_status_for_publication,sum(total_amount_of_payment_usdollars), count(record_id)",
-		"research":"dispute_status_for_publication,sum(total_amount_of_payment_usdollars), count(record_id)",
-		"ownership":"dispute_status_for_publication,sum(total_amount_invested_usdollars),sum(value_of_interest), count(record_id)",
-		"pi":"dispute_status_for_publication,sum(total_amount_of_payment_usdollars), count(record_id)"
+		"general":"dispute_status_for_publication as disuputed,sum(total_amount_of_payment_usdollars) as value, count(record_id) as count",
+		"research":"dispute_status_for_publication as disuputed,sum(total_amount_of_payment_usdollars)as value, count(record_id) as count",
+		"ownership":"dispute_status_for_publication as disuputed,sum(total_amount_invested_usdollars) as invested,sum(value_of_interest) as interest, count(record_id) as count",
+		"pi":"dispute_status_for_publication as disuputed,sum(total_amount_of_payment_usdollars) as value, count(record_id)as count"
 	}
 }

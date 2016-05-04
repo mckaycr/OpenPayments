@@ -32,7 +32,7 @@ describe('open-payments',function(){
             var options = {'id':'268527','type': 'physician'};
             this.timeout(15000)
             cr.summary(options, function(err, data){
-                expect(data[0].data[0]).to.have.a.property('count_record_id','81')
+                expect(data[0].data[0]).to.have.a.property('count','81')
                 done()
             });
         });
@@ -40,7 +40,7 @@ describe('open-payments',function(){
             var options = {'id':'100000000286','type': 'company'};
             this.timeout(15000)
             cr.summary(options, function(err, data){
-                expect(data[0].data[0]).to.have.a.property('count_record_id','176265')
+                expect(data[0].data[0]).to.have.a.property('count','176265')
                 done()
             });
         });
@@ -48,7 +48,7 @@ describe('open-payments',function(){
             var options = {'id':'644','type': 'hospital'};
             this.timeout(15000)
             cr.summary(options, function(err, data){
-                expect(data[0].data[0]).to.have.a.property('count_record_id','45')
+                expect(data[0].data[0]).to.have.a.property('count','45')
                 done()
             });
         });
