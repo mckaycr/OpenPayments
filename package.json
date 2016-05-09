@@ -1,6 +1,6 @@
 {
   "name": "open-payments",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This is meant to be a module that other developers can use to build search tools interfaces for Open Payments data.",
   "main": "index.js",
   "scripts": {
