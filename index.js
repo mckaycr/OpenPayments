@@ -1,1 +1,1 @@
-module.exports = require('./lib/sum');
+module.exports = require('./lib/open-payments');
