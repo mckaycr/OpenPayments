@@ -4,7 +4,7 @@
 		"key":"",
 		"app_token":""
 	},
-	"url":"https://openpaymentsdata.cms.gov/resource/",
+	"url":"openpaymentsdata.cms.gov",
 	"datasets":{
 		"2013":{
 			"general":"anxy-rykp",
