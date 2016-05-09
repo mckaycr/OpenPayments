@@ -1,6 +1,6 @@
 {
   "name": "open-payments",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "This is meant to be a module that other developers can use to build search tools interfaces for Open Payments data.",
   "main": "index.js",
   "scripts": {
@@ -31,7 +31,6 @@
   "_shasum": "950722992c58066749bb86b974f492032523094e",
   "_from": "open-payments@*",
   "dependencies": {
-    "request": "^2.69.0",
     "soda-js": "^0.2.2"
   },
   "devDependencies": {

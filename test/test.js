@@ -34,7 +34,6 @@ describe('open-payments',function(){
             var options = {'id':'268527','type': 'physician'};
             this.timeout(0)
             cr.summary(options, function(err, data){
-            	console.log(data)
                 expect(data[2013].general).to.have.a.property('count',81)
                 done()
             });
@@ -82,5 +81,4 @@ describe('open-payments',function(){
 	// 		})
 	// 	})
 	// })
->>>>>>> dev
 });
