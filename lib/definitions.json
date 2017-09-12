@@ -27,27 +27,14 @@
       "2015": "5qzn-avti",
       "2016": "69x2-tucm"
     },
-    "physician": {
-      "2016": "3d7f-ag44"
-    },
-    "company": {
-      "2016": "y6tv-rfvt"
-    },
-    "hospital": {
-      "2016": "wde7-qxhs"
-    }
+    "company": "y6tv-rfvt",
+    "hospital": "wde7-qxhs",
+    "physician": "3d7f-ag44"
   },
-  "searchFile": {
-    "endPoint": {
-      "physician": "gmj8-2w4s",
-      "company": "a9zx-nnrd",
-      "hospital": "8rvs-2spk"
-    },
-    "fieldName": {
-      "physician": "physician_profile_id",
-      "company": "amgpo_making_payment_id",
-      "hospital": "teaching_hospital_ccn"
-    }
+  "fieldName": {
+    "physician": "physician_profile_id",
+    "company": "amgpo_making_payment_id",
+    "hospital": "teaching_hospital_ccn"
   },
   "selects": {
     "general": "sum(total_amount_of_payment_usdollars) as value, count(record_id) as count",
