@@ -1,40 +1,58 @@
 {
-	"auth":{
-		"user":"",
-		"key":"",
-		"app_token":""
-	},
-	"url":"openpaymentsdata.cms.gov",
-	"datasets":{
-		"2013":{
-			"general":"anxy-rykp",
-			"research":"js34-gyng",
-			"ownership":"qfxb-3che",
-			"pi":"js34-gyng"
-		},
-		"2014":{
-			"general":"v3nw-usd7",
-			"research":"rcq9-ev4w",
-			"ownership":"etee-p3wf",
-			"pi":"rcq9-ev4w"	
-		}
-	},
-	"searchFile":{
-		"endPoint":{
-			"physician":"gmj8-2w4s",
-			"company":"a9zx-nnrd",
-			"hospital":"8rvs-2spk"
-		},
-		"fieldName":{
-			"physician":"physician_profile_id",
-			"company":"amgpo_making_payment_id",
-			"hospital":"teaching_hospital_id"
-		}
-	},
-	"selects":{
-		"general":"sum(total_amount_of_payment_usdollars) as value, count(record_id) as count",
-		"research":"sum(total_amount_of_payment_usdollars)as value, count(record_id) as count",
-		"ownership":"sum(total_amount_invested_usdollars) as invested,sum(value_of_interest) as interest, count(record_id) as count",
-		"pi":"sum(total_amount_of_payment_usdollars) as value, count(record_id)as count"
-	}
+  "auth": {
+    "user": "",
+    "key": "",
+    "app_token": ""
+  },
+  "url": "openpaymentsdata.cms.gov",
+  "datasets": {
+    "general": {
+      "2013": "wfk4-9nvc",
+      "2014": "3fjf-8tkd",
+      "2015": "fmkp-uj7a",
+      "2016": "qzic-dhiq"
+    },
+    "ver_ctrl": {
+      "updated": "09/31/2017"
+    },
+    "ownership": {
+      "2013": "asvk-mcxm",
+      "2014": "vbu5-rvtq",
+      "2015": "dht5-5f4q",
+      "2016": "k3v6-n78v"
+    },
+    "research": {
+      "2013": "m2u7-7eav",
+      "2014": "h2vw-ujpg",
+      "2015": "5qzn-avti",
+      "2016": "69x2-tucm"
+    },
+    "physician": {
+      "2016": "3d7f-ag44"
+    },
+    "company": {
+      "2016": "y6tv-rfvt"
+    },
+    "hospital": {
+      "2016": "wde7-qxhs"
+    }
+  },
+  "searchFile": {
+    "endPoint": {
+      "physician": "gmj8-2w4s",
+      "company": "a9zx-nnrd",
+      "hospital": "8rvs-2spk"
+    },
+    "fieldName": {
+      "physician": "physician_profile_id",
+      "company": "amgpo_making_payment_id",
+      "hospital": "teaching_hospital_ccn"
+    }
+  },
+  "selects": {
+    "general": "sum(total_amount_of_payment_usdollars) as value, count(record_id) as count",
+    "research": "sum(total_amount_of_payment_usdollars)as value, count(record_id) as count",
+    "ownership": "sum(total_amount_invested_usdollars) as invested,sum(value_of_interest) as interest, count(record_id) as count",
+    "pi": "sum(total_amount_of_payment_usdollars) as value, count(record_id)as count"
+  }
 }
