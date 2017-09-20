@@ -4,6 +4,9 @@
     "key": "",
     "app_token": ""
   },
+  "ver_ctrl": {
+    "updated": "09/20/2017"
+  },
   "url": "openpaymentsdata.cms.gov",
   "datasets": {
     "general": {
@@ -11,9 +14,6 @@
       "2014": "3fjf-8tkd",
       "2015": "fmkp-uj7a",
       "2016": "qzic-dhiq"
-    },
-    "ver_ctrl": {
-      "updated": "09/12/2017"
     },
     "ownership": {
       "2013": "asvk-mcxm",
@@ -26,7 +26,9 @@
       "2014": "h2vw-ujpg",
       "2015": "5qzn-avti",
       "2016": "69x2-tucm"
-    },
+    }
+  },
+  "providers": {
     "company": "y6tv-rfvt",
     "hospital": "wde7-qxhs",
     "physician": "3d7f-ag44"
