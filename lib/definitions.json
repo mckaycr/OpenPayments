@@ -35,13 +35,13 @@
   },
   "fieldName": {
     "physician": "physician_profile_id",
-    "company": "amgpo_making_payment_id",
+    "company": "applicable_manufacturer_or_applicable_gpo_making_payment_id",
     "hospital": "teaching_hospital_ccn"
   },
   "selects": {
-    "general": "sum(total_amount_of_payment_usdollars) as value, count(record_id) as count",
-    "research": "sum(total_amount_of_payment_usdollars)as value, count(record_id) as count",
-    "ownership": "sum(total_amount_invested_usdollars) as invested,sum(value_of_interest) as interest, count(record_id) as count",
-    "pi": "sum(total_amount_of_payment_usdollars) as value, count(record_id)as count"
+    "general": "sum(total_amount_of_payment_usdollars) as value, count(record_id) as count, dispute_status_for_publication as disputed",
+    "research": "sum(total_amount_of_payment_usdollars)as value, count(record_id) as count,dispute_status_for_publication as disputed",
+    "ownership": "sum(total_amount_invested_usdollars) as invested,sum(value_of_interest) as interest, count(record_id) as count,dispute_status_for_publication as disputed",
+    "pi": "sum(total_amount_of_payment_usdollars) as value, count(record_id)as count,dispute_status_for_publication as disputed"
   }
 }
